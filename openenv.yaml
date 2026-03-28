@@ -1,0 +1,39 @@
+name: security-log-env
+description: >
+  A reinforcement learning environment for cybersecurity log analysis.
+  The agent must analyze system logs and predict attack category,
+  severity, and appropriate mitigation action.
+
+version: 1.0.0
+
+tasks:
+  - name: easy
+    description: Detect whether the log is normal or an attack
+
+  - name: medium
+    description: Classify the type of attack
+
+  - name: hard
+    description: Predict category, severity, and mitigation action
+
+action_space:
+  type: object
+  properties:
+    category:
+      type: string
+      enum: [brute_force, malware, phishing, dos_attack, normal]
+    severity:
+      type: string
+      enum: [low, medium, high]
+    action:
+      type: string
+
+observation_space:
+  type: object
+  properties:
+    log:
+      type: string
+    system:
+      type: string
+
+reward_range: [0, 1]

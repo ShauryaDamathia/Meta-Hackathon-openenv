@@ -1,0 +1,452 @@
+[
+  {
+    "log": "Failed password for invalid user admin from 185.234.217.92 port 49822 ssh2",
+    "system": "SSH",
+    "expected": {
+      "category": "brute_force",
+      "severity": "medium",
+      "action": "block IP and enable rate limiting"
+    }
+  },
+  {
+    "log": "Accepted publickey for ubuntu from 10.0.0.14 port 42111 ssh2",
+    "system": "SSH",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "POST /api/auth HTTP/1.1 401 Unauthorized from 203.91.112.44",
+    "system": "web server",
+    "expected": {
+      "category": "brute_force",
+      "severity": "medium",
+      "action": "enable rate limiting and captcha"
+    }
+  },
+  {
+    "log": "GET /home HTTP/1.1 200 OK from 192.168.0.22",
+    "system": "web server",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "User root authentication failures exceeded threshold from 45.77.23.11",
+    "system": "SSH",
+    "expected": {
+      "category": "brute_force",
+      "severity": "high",
+      "action": "disable root login and block source IP"
+    }
+  },
+  {
+    "log": "Suspicious upload detected: .php file via /images endpoint",
+    "system": "web server",
+    "expected": {
+      "category": "malware",
+      "severity": "high",
+      "action": "remove file and restrict upload types"
+    }
+  },
+  {
+    "log": "Database connection established from app node 10.1.2.3",
+    "system": "database",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "Outbound SMTP traffic spike detected for user sales@company.com",
+    "system": "email",
+    "expected": {
+      "category": "phishing",
+      "severity": "high",
+      "action": "suspend account and inspect sent emails"
+    }
+  },
+  {
+    "log": "High frequency requests to /search endpoint from 103.56.98.21",
+    "system": "web server",
+    "expected": {
+      "category": "dos_attack",
+      "severity": "medium",
+      "action": "apply rate limiting and block IP"
+    }
+  },
+  {
+    "log": "User analyst logged into database from 10.2.3.5",
+    "system": "database",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "Email attachment with macro blocked from unknown sender",
+    "system": "email",
+    "expected": {
+      "category": "malware",
+      "severity": "medium",
+      "action": "quarantine email and alert user"
+    }
+  },
+  {
+    "log": "Repeated AUTH failures for mailbox admin@corp.com from 51.158.32.9",
+    "system": "email",
+    "expected": {
+      "category": "brute_force",
+      "severity": "medium",
+      "action": "block IP and enforce MFA"
+    }
+  },
+  {
+    "log": "GET /admin HTTP/1.1 403 Forbidden from 198.18.1.2",
+    "system": "web server",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "monitor for repeated attempts"
+    }
+  },
+  {
+    "log": "Slow query detected: SELECT * FROM payments exceeding threshold",
+    "system": "database",
+    "expected": {
+      "category": "normal",
+      "severity": "medium",
+      "action": "optimize query and indexes"
+    }
+  },
+  {
+    "log": "SSH connection attempt using deprecated protocol version 1",
+    "system": "SSH",
+    "expected": {
+      "category": "malware",
+      "severity": "medium",
+      "action": "disable legacy protocol support"
+    }
+  },
+  {
+    "log": "Inbound email flagged for spoofed domain billing@secure-payments.co",
+    "system": "email",
+    "expected": {
+      "category": "phishing",
+      "severity": "high",
+      "action": "block sender domain and notify users"
+    }
+  },
+  {
+    "log": "GET /api/status HTTP/1.1 200 OK from 10.0.0.7",
+    "system": "web server",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "Multiple DB connections opened from 192.168.3.14 in short interval",
+    "system": "database",
+    "expected": {
+      "category": "dos_attack",
+      "severity": "medium",
+      "action": "limit connections per IP"
+    }
+  },
+  {
+    "log": "Account locked after consecutive failed SSH logins",
+    "system": "SSH",
+    "expected": {
+      "category": "brute_force",
+      "severity": "medium",
+      "action": "investigate IP and enable MFA"
+    }
+  },
+  {
+    "log": "Outbound email rate anomaly detected for hr@company.com",
+    "system": "email",
+    "expected": {
+      "category": "phishing",
+      "severity": "high",
+      "action": "disable account and audit activity"
+    }
+  },
+  {
+    "log": "Checksum mismatch detected for /usr/sbin/sshd",
+    "system": "SSH",
+    "expected": {
+      "category": "malware",
+      "severity": "high",
+      "action": "restore binary and investigate compromise"
+    }
+  },
+  {
+    "log": "GET /robots.txt HTTP/1.1 200 OK from 66.249.65.10",
+    "system": "web server",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "Database login failed for admin from 77.91.12.33",
+    "system": "database",
+    "expected": {
+      "category": "brute_force",
+      "severity": "medium",
+      "action": "restrict access and rotate credentials"
+    }
+  },
+  {
+    "log": "Email contains suspicious shortened URL",
+    "system": "email",
+    "expected": {
+      "category": "phishing",
+      "severity": "medium",
+      "action": "block URL and warn recipient"
+    }
+  },
+  {
+    "log": "Traffic surge detected on /login endpoint",
+    "system": "web server",
+    "expected": {
+      "category": "dos_attack",
+      "severity": "medium",
+      "action": "enable throttling and monitoring"
+    }
+  },
+  {
+    "log": "SSH session closed for user ec2-user",
+    "system": "SSH",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "Execution of unknown binary from /tmp/.x9",
+    "system": "database",
+    "expected": {
+      "category": "malware",
+      "severity": "high",
+      "action": "remove binary and scan system"
+    }
+  },
+  {
+    "log": "Incoming email rejected due to SPF validation failure",
+    "system": "email",
+    "expected": {
+      "category": "phishing",
+      "severity": "medium",
+      "action": "update SPF rules and monitor sender"
+    }
+  },
+  {
+    "log": "GET /login HTTP/1.1 200 OK from 172.16.1.2",
+    "system": "web server",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "Too many DB connections from 10.10.5.6 causing slowdown",
+    "system": "database",
+    "expected": {
+      "category": "dos_attack",
+      "severity": "high",
+      "action": "block IP and enforce connection limits"
+    }
+  },
+  {
+    "log": "SSH login attempt with invalid key for user admin",
+    "system": "SSH",
+    "expected": {
+      "category": "brute_force",
+      "severity": "medium",
+      "action": "disable password auth and monitor attempts"
+    }
+  },
+  {
+    "log": "Injected script detected in HTTP response payload",
+    "system": "web server",
+    "expected": {
+      "category": "malware",
+      "severity": "high",
+      "action": "sanitize inputs and deploy WAF"
+    }
+  },
+  {
+    "log": "Email impersonation attempt detected for ceo@company.com",
+    "system": "email",
+    "expected": {
+      "category": "phishing",
+      "severity": "high",
+      "action": "alert users and block sender"
+    }
+  },
+  {
+    "log": "Long running UPDATE query detected in orders table",
+    "system": "database",
+    "expected": {
+      "category": "normal",
+      "severity": "medium",
+      "action": "optimize query performance"
+    }
+  },
+  {
+    "log": "SYN flood pattern detected from 91.200.12.5",
+    "system": "web server",
+    "expected": {
+      "category": "dos_attack",
+      "severity": "high",
+      "action": "enable SYN protection and block IP"
+    }
+  },
+  {
+    "log": "SSH key authentication successful for user deploy",
+    "system": "SSH",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "Unauthorized schema change detected in production DB",
+    "system": "database",
+    "expected": {
+      "category": "malware",
+      "severity": "high",
+      "action": "audit changes and restore if needed"
+    }
+  },
+  {
+    "log": "Executable attachment blocked in incoming email",
+    "system": "email",
+    "expected": {
+      "category": "malware",
+      "severity": "medium",
+      "action": "quarantine attachment"
+    }
+  },
+  {
+    "log": "Repeated POST requests to /wp-login.php from multiple IPs",
+    "system": "web server",
+    "expected": {
+      "category": "brute_force",
+      "severity": "high",
+      "action": "block IPs and enable login protection"
+    }
+  },
+  {
+    "log": "Database connection timeout from application server",
+    "system": "database",
+    "expected": {
+      "category": "normal",
+      "severity": "medium",
+      "action": "check DB load and connectivity"
+    }
+  },
+  {
+    "log": "Email link redirecting to suspicious domain detected",
+    "system": "email",
+    "expected": {
+      "category": "phishing",
+      "severity": "high",
+      "action": "block link and notify users"
+    }
+  },
+  {
+    "log": "Unusual connection pattern on SSH port 22",
+    "system": "SSH",
+    "expected": {
+      "category": "dos_attack",
+      "severity": "medium",
+      "action": "limit connections and enable firewall"
+    }
+  },
+  {
+    "log": "GET /healthcheck HTTP/1.1 200 OK from 127.0.0.1",
+    "system": "web server",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "no action required"
+    }
+  },
+  {
+    "log": "Unauthorized SELECT attempt on restricted table payroll",
+    "system": "database",
+    "expected": {
+      "category": "malware",
+      "severity": "high",
+      "action": "revoke permissions and audit logs"
+    }
+  },
+  {
+    "log": "High bounce rate detected for outgoing emails",
+    "system": "email",
+    "expected": {
+      "category": "phishing",
+      "severity": "medium",
+      "action": "investigate account compromise"
+    }
+  },
+  {
+    "log": "Failed SSH login for user test from 82.102.44.2",
+    "system": "SSH",
+    "expected": {
+      "category": "brute_force",
+      "severity": "low",
+      "action": "monitor activity"
+    }
+  },
+  {
+    "log": "GET /api/data HTTP/1.1 500 Internal Server Error",
+    "system": "web server",
+    "expected": {
+      "category": "normal",
+      "severity": "medium",
+      "action": "check application logs and fix error"
+    }
+  },
+  {
+    "log": "Scheduled database backup completed successfully",
+    "system": "database",
+    "expected": {
+      "category": "normal",
+      "severity": "low",
+      "action": "verify backup integrity"
+    }
+  },
+  {
+    "log": "Email flagged due to mismatched sender domain",
+    "system": "email",
+    "expected": {
+      "category": "phishing",
+      "severity": "medium",
+      "action": "block sender and educate users"
+    }
+  },
+  {
+    "log": "CPU spike observed during HTTP traffic surge",
+    "system": "web server",
+    "expected": {
+      "category": "dos_attack",
+      "severity": "high",
+      "action": "scale resources and filter traffic"
+    }
+  }
+]
