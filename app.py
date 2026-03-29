@@ -1,8 +1,16 @@
 from fastapi import FastAPI
+
+from agent_contract import (
+    ALLOWED_CATEGORIES,
+    ALLOWED_SEVERITIES,
+    BASE_AGENT_INSTRUCTIONS,
+    RESPONSE_EXAMPLE,
+)
 from environment import SecurityEnv
+from grader import grade_response
+
 
 app = FastAPI()
-
 env = SecurityEnv()
 
 
@@ -21,54 +29,52 @@ def state():
     return env.state()
 
 
-# 🔹 Required: tasks endpoint
 @app.get("/tasks")
 def tasks():
     return {
         "tasks": [
             {
                 "name": "easy",
-                "description": "Detect normal vs attack"
+                "description": "Detect normal vs attack",
             },
             {
                 "name": "medium",
-                "description": "Classify category"
+                "description": "Classify category",
             },
             {
                 "name": "hard",
-                "description": "Category + severity + action"
-            }
-        ]
+                "description": "Category + severity + action",
+            },
+        ],
+        "output_contract": {
+            "instructions": BASE_AGENT_INSTRUCTIONS,
+            "allowed_categories": ALLOWED_CATEGORIES,
+            "allowed_severities": ALLOWED_SEVERITIES,
+            "response_example": RESPONSE_EXAMPLE,
+        },
     }
 
 
-# 🔹 Required: grader endpoint
 @app.post("/grader")
 def grader(data: dict):
     predicted = data["predicted"]
     expected = data["expected"]
-
-    from grader import grade_response
     score = grade_response(predicted, expected)
 
     return {"score": score}
 
 
-# 🔹 Required: baseline endpoint
 @app.get("/baseline")
 def baseline():
-    # dummy baseline (random guess for now)
     sample = env.reset()
-
     action = {
         "category": "normal",
         "severity": "low",
-        "action": "monitor"
+        "action": "monitor",
     }
-
     result = env.step(action)
 
     return {
         "observation": sample,
-        "result": result
+        "result": result,
     }

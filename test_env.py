@@ -1,14 +1,16 @@
 from environment import SecurityEnv
 
+
 env = SecurityEnv()
 
-obs = env.reset()
-print("Observation:", obs)
+observation = env.reset()
+print("Observation:", observation)
+print("Agent prompt:", observation["agent_prompt"])
 
 action = {
     "category": "brute_force",
     "severity": "high",
-    "action": "block IP"
+    "action": "block IP",
 }
 
 result = env.step(action)

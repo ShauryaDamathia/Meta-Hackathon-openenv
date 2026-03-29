@@ -1,8 +1,9 @@
 name: security-log-env
 description: >
   A reinforcement learning environment for cybersecurity log analysis.
-  The agent must analyze system logs and predict attack category,
-  severity, and appropriate mitigation action.
+  The agent must analyze system logs and return a JSON answer with the keys
+  category, severity, and action. Scoring is based on cosine similarity
+  between vectorized expected and predicted responses, normalized to [0, 1].
 
 version: 1.0.0
 
@@ -22,11 +23,14 @@ action_space:
     category:
       type: string
       enum: [brute_force, malware, phishing, dos_attack, normal]
+      description: Must match one of the allowed category labels.
     severity:
       type: string
       enum: [low, medium, high]
+      description: Must match one of the allowed severity labels.
     action:
       type: string
+      description: A short, concrete mitigation action.
 
 observation_space:
   type: object
@@ -35,5 +39,20 @@ observation_space:
       type: string
     system:
       type: string
+    instructions:
+      type: string
+      description: Output contract for the agent.
+    agent_prompt:
+      type: string
+      description: Ready-to-send prompt for an OpenAI agent.
+    response_example:
+      type: object
+      properties:
+        category:
+          type: string
+        severity:
+          type: string
+        action:
+          type: string
 
 reward_range: [0, 1]
