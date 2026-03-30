@@ -42,6 +42,16 @@ observation_space:
     instructions:
       type: string
       description: Output contract for the agent.
+    allowed_categories:
+      type: array
+      items:
+        type: string
+      description: Allowed category labels for the response.
+    allowed_severities:
+      type: array
+      items:
+        type: string
+      description: Allowed severity labels for the response.
     agent_prompt:
       type: string
       description: Ready-to-send prompt for an OpenAI agent.
