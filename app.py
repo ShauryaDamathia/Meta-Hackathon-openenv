@@ -21,7 +21,14 @@ def reset():
 
 @app.post("/step")
 def step(action: dict):
-    return env.step(action)
+    # ✅ Safe extraction (prevents crashes)
+    safe_action = {
+        "category": str(action.get("category", "")).strip().lower(),
+        "severity": str(action.get("severity", "")).strip().lower(),
+        "action": str(action.get("action", "")).strip()
+    }
+
+    return env.step(safe_action)
 
 
 @app.get("/state")

@@ -1,12 +1,11 @@
 import json
 
-
 ALLOWED_CATEGORIES = ["brute_force", "malware", "phishing", "dos_attack", "normal"]
 ALLOWED_SEVERITIES = ["low", "medium", "high"]
 RESPONSE_EXAMPLE = {
-    "category": "brute_force",
-    "severity": "high",
-    "action": "block source IP and enable rate limiting",
+  "category": "normal",
+  "severity": "low",
+  "action": "monitor activity"
 }
 
 BASE_AGENT_INSTRUCTIONS = (
