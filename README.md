@@ -1,4 +1,4 @@
-# Meta Hackathon OpenEnv
+# Meta Hackathon OpenEnv - Cyber Security Log Analysis
 
 This project exposes a small cybersecurity log-analysis environment with a FastAPI
 server, a local environment class, and an agent evaluation script.
