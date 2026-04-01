@@ -1,9 +1,10 @@
+.git
 .env
-agent_eval_log.jsonl
 __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .venv/
 venv/
+agent_eval_log.jsonl
 *.py[cod]
