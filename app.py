@@ -9,10 +9,16 @@ from agent_contract import (
 from environment import SecurityEnv
 from grader import grade_response
 
-
-app = FastAPI()
+app = FastAPI(
+    root_path="/",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
 env = SecurityEnv()
 
+@app.get("/")
+def root():
+    return {"message": "Security Log OpenEnv is running"}
 
 @app.get("/reset")
 def reset():
