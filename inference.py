@@ -6,28 +6,26 @@ API_BASE_URL = os.getenv(
     "https://shauryadamathia-security-log-analysis-openenv.hf.space"
 )
 
-MODEL_NAME = os.getenv("MODEL_NAME", "baseline")
-
-
 def run():
-    # reset
+    print("START")
+
     r = requests.get(f"{API_BASE_URL}/reset")
     obs = r.json()
 
-    # simple baseline response
+    print("STEP reset:", obs)
+
     action = {
         "category": "normal",
         "severity": "low",
-        "action": "monitor"
+        "action": "monitor activity"
     }
 
-    # step
     r = requests.post(f"{API_BASE_URL}/step", json=action)
     result = r.json()
 
-    print("Observation:", obs)
-    print("Result:", result)
+    print("STEP result:", result)
 
+    print("END")
 
 if __name__ == "__main__":
     run()
