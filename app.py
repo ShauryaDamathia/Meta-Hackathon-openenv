@@ -9,12 +9,15 @@ from agent_contract import (
 from environment import SecurityEnv
 from grader import grade_response
 
+
 app = FastAPI(
-    root_path="/",
     docs_url="/docs",
-    redoc_url="/redoc"
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
 )
 env = SecurityEnv()
+
+app.router.redirect_slashes = False
 
 @app.get("/")
 def root():
