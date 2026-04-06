@@ -1,14 +1,17 @@
 [project]
 name = "security-log-openenv"
 version = "0.1.0"
-description = "Cybersecurity Log Analysis OpenEnv environment"
-readme = "README.md"
-requires-python = ">=3.9"
+description = "Security log analysis OpenEnv"
+requires-python = ">=3.10"
 dependencies = [
     "fastapi",
     "uvicorn",
-    "requests"
+    "requests",
+    "openenv-core>=0.2.0"
 ]
 
+[project.scripts]
+server = "server.app:app"
+
 [tool.openenv]
-entrypoint = "app:app"
+entrypoint = "server.app:app"
