@@ -26,10 +26,11 @@ def post(url, data):
 
 def run():
     try:
-        print("START")
+        task_name = "security_log_analysis"
+
+        print(f"[START] task={task_name}", flush=True)
 
         obs = get(f"{API_BASE_URL}/reset")
-        print("STEP reset:", obs)
 
         action = {
             "category": "normal",
@@ -38,12 +39,21 @@ def run():
         }
 
         result = post(f"{API_BASE_URL}/step", action)
-        print("STEP result:", result)
 
-        print("END")
+        reward = result.get("reward", 0.0)
+
+        print(
+            f"[STEP] step=1 reward={reward}",
+            flush=True
+        )
+
+        print(
+            f"[END] task={task_name} score={reward} steps=1",
+            flush=True
+        )
 
     except Exception as e:
-        print("ERROR:", str(e))
+        print(f"[ERROR] {str(e)}", flush=True)
 
 
 if __name__ == "__main__":
