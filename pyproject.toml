@@ -4,9 +4,9 @@ version = "0.1.0"
 description = "Security log analysis OpenEnv"
 requires-python = ">=3.10"
 dependencies = [
-    "fastapi",
-    "uvicorn",
-    "requests",
+    "fastapi==0.110.0",
+    "uvicorn==0.29.0",
+    "requests==2.31.0",
     "openenv-core>=0.2.0"
 ]
 
@@ -14,4 +14,4 @@ dependencies = [
 server = "server.app:main"
 
 [tool.openenv]
-entrypoint = "server.app:app"
+entrypoint = "server.app:main"
