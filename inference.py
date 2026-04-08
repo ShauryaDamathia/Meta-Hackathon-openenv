@@ -51,20 +51,28 @@ def score_medium(expected, predicted):
 
 
 def main():
-    # reset once (same query for all tasks)
+    # reset once
     obs = get(f"{ENV_URL}/reset")
-    prompt = obs["agent_prompt"]
 
-    # model prediction once
-    if client:
-        response = client.chat.completions.create(
-            model=MODEL_NAME,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0,
-        )
-        text = response.choices[0].message.content.strip()
-        action = json.loads(text)
-    else:
+    # handle different env formats
+    prompt = obs.get("agent_prompt")
+    if not prompt:
+        prompt = json.dumps(obs)
+
+    # safe model call
+    try:
+        if client:
+            response = client.chat.completions.create(
+                model=MODEL_NAME,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0,
+            )
+            text = response.choices[0].message.content.strip()
+            action = json.loads(text)
+        else:
+            raise Exception("no client")
+
+    except Exception:
         action = {
             "category": "normal",
             "severity": "low",
@@ -77,7 +85,7 @@ def main():
     reward = float(result.get("reward", 0.0))
     expected = result.get("info", {}).get("expected", {}) or {}
 
-    # evaluate across tasks
+    # run 3 tasks
     for task_name in ["easy", "medium", "hard"]:
 
         print(f"[START] task={task_name} env=security_log model={MODEL_NAME}", flush=True)
@@ -88,7 +96,7 @@ def main():
         elif task_name == "medium":
             score = score_medium(expected, action)
 
-        else:  # hard
+        else:
             score = reward
 
         score = max(0.01, min(0.99, score))
