@@ -33,6 +33,7 @@ def post(url, data):
         return json.loads(response.read().decode())
 
 
+# ---------------- EASY ----------------
 def score_easy(expected, predicted):
     exp_cat = expected.get("category", "normal")
     pred_cat = predicted.get("category", "normal")
@@ -40,21 +41,59 @@ def score_easy(expected, predicted):
     exp_attack = exp_cat != "normal"
     pred_attack = pred_cat != "normal"
 
-    return 1.0 if exp_attack == pred_attack else 0.0
+    return 0.99 if exp_attack == pred_attack else 0.01
+
+
+# ---------------- MEDIUM ----------------
+SIMILARITY = {
+    "brute_force": {
+        "brute_force": 0.99,
+        "phishing": 0.80,
+        "malware": 0.60,
+        "dos_attack": 0.40,
+        "normal": 0.01,
+    },
+    "phishing": {
+        "brute_force": 0.80,
+        "phishing": 0.99,
+        "malware": 0.65,
+        "dos_attack": 0.40,
+        "normal": 0.01,
+    },
+    "malware": {
+        "brute_force": 0.60,
+        "phishing": 0.65,
+        "malware": 0.99,
+        "dos_attack": 0.50,
+        "normal": 0.01,
+    },
+    "dos_attack": {
+        "brute_force": 0.40,
+        "phishing": 0.40,
+        "malware": 0.50,
+        "dos_attack": 0.99,
+        "normal": 0.01,
+    },
+    "normal": {
+        "brute_force": 0.01,
+        "phishing": 0.01,
+        "malware": 0.01,
+        "dos_attack": 0.01,
+        "normal": 0.99,
+    },
+}
 
 
 def score_medium(expected, predicted):
-    exp_cat = expected.get("category", "")
-    pred_cat = predicted.get("category", "")
-
-    return 1.0 if exp_cat == pred_cat else 0.0
+    exp = expected.get("category", "normal")
+    pred = predicted.get("category", "normal")
+    return SIMILARITY.get(exp, {}).get(pred, 0.01)
 
 
 def main():
     # reset once
     obs = get(f"{ENV_URL}/reset")
 
-    # handle different env formats
     prompt = obs.get("agent_prompt")
     if not prompt:
         prompt = json.dumps(obs)
@@ -70,7 +109,7 @@ def main():
             text = response.choices[0].message.content.strip()
             action = json.loads(text)
         else:
-            raise Exception("no client")
+            raise Exception("No client")
 
     except Exception:
         action = {
@@ -85,7 +124,7 @@ def main():
     reward = float(result.get("reward", 0.0))
     expected = result.get("info", {}).get("expected", {}) or {}
 
-    # run 3 tasks
+    # run all tasks
     for task_name in ["easy", "medium", "hard"]:
 
         print(f"[START] task={task_name} env=security_log model={MODEL_NAME}", flush=True)
